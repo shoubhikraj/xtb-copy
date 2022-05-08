@@ -26,7 +26,14 @@ program xtb_prog_primary
    use xtb_type_environment
 
    implicit none
-
+   
+#if defined(_WIN32) || defined(_WIN64)   
+   interface
+      subroutine fix_console_cp() bind(C, name="fix_console_cp")
+      end subroutine fix_console_cp
+   end interface
+#endif
+   
    !> Command line argument parser
    type(TArgParser) :: argParser
 
@@ -47,7 +54,12 @@ program xtb_prog_primary
 
    !> Get the requested run mode
    call getRunmode(argParser, runMode)
-
+   
+#if defined(_WIN32) || defined(_WIN64)   
+   !> Fix the console output font in Windows
+   call fix_console_cp()
+#endif
+   
    !> Select the correct submodule to run
    select case(runMode)
    case(xtbSubmodule%main)
