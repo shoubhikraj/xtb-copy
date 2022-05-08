@@ -7,6 +7,15 @@
  *  code but actually impossible to do with FORTRAN only.
  */
 #include <signal.h>
+#if defined(_WIN32) || defined(_WIN64)
+
+#include <windows.h>
+void fix_console_cp()
+{
+   SetConsoleOutputCP(65001);
+}
+
+#endif
 
 typedef void (*sighandler_t)(int);
 
