@@ -19,14 +19,14 @@
 project(
   'xtb',
   'fortran', 'c',
-  version: '6.4.1',
-  license: 'LGPL3',
+  version: '6.5.0',
+  license: 'LGPL3-3.0-or-later',
   meson_version: '>=0.55',
   default_options: [
-    'includedir=include/xtb',
     'buildtype=debugoptimized',
     'default_library=both',
     'optimization=2',
+    'c_std=c11',
   ],
 )
 
